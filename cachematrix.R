@@ -49,4 +49,4 @@ cacheSolve <- function(x, ...) {
 ## Tested using matrix(c(1,3,5,6),2,2)
 ## Returned cached result on second iteration
 ## matrix multiplied by inverse produced identity
-## with small numerical difference of approx 10e-16
+## with negligible numerical error of approx 1e-16
