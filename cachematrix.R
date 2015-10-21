@@ -15,7 +15,7 @@ makeCacheMatrix <- function(x = matrix()) {
     ## retrieve the matrix
     get <- function() x
     ## calculate the inverse
-    setsolve <- function(solve) m <<- solve
+    setsolve <- function(solved_m) m <<- solved_m
     ## retrieve the inverse
     getsolve <- function() m
     ## return a list containing the functions.
@@ -46,7 +46,21 @@ cacheSolve <- function(x, ...) {
     m
 }
 
-## Tested using matrix(c(1,3,5,6),2,2)
-## Returned cached result on second iteration
-## matrix multiplied by inverse produced identity
-## with negligible numerical error of approx 1e-16
+## Tested using matrix(c(2,1,1,2),2,2)
+## Returned cached result on second iteration.
+## Matrix multiplied by inverse produced identity.
+
+## The following test code was used
+testcacheSolve <- function(test_matrix=matrix(c(2,1,1,2),2,2)) {
+    ## set to correct type
+    test_cachematrix<-makeCacheMatrix(test_matrix)
+    ## solve matrix
+    test_cachematrix_inverse<-cacheSolve(test_cachematrix)
+    ## solve again to use cached value
+    test_cachematrix_inverse<-cacheSolve(test_cachematrix)
+    ## multiply by original to return identity
+    test_matrix%*%test_cachematrix_inverse
+}
+
+## Originally submitted for R Programming course on Coursera in June 2015
+## Resubmitted as the course has been retaken to get Course Certificate on Signature Track in October 2015
